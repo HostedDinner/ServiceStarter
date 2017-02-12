@@ -5,3 +5,36 @@
 IDI_MAINICON ICON "../resource/icon.ico"
 
 CREATEPROCESS_MANIFEST_RESOURCE_ID 24 "../resource/xp.manifest"
+
+
+
+
+VS_VERSION_INFO VERSIONINFO
+PRODUCTVERSION 	VER_PRODUCTVERSION
+FILEVERSION     VER_PRODUCTVERSION
+FILEFLAGSMASK  	VS_FFI_FILEFLAGSMASK
+FILEFLAGS      	VER_DEBUG
+FILEOS         	VOS_NT
+FILETYPE       	VFT_APP
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName",      "Fabian Neffgen"
+            VALUE "FileDescription",  "Simple App for starting a service"
+            VALUE "FileVersion",      VER_PRODUCTVERSION_STR
+            VALUE "InternalName",     "ServiceStarter"
+            VALUE "LegalCopyright",   "Release under MIT License"
+            VALUE "OriginalFilename", "ServiceStarter"
+            VALUE "ProductName",      "ServiceStarter"
+            VALUE "ProductVersion",   VER_PRODUCTVERSION_STR
+        END
+    END
+
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0409, 0x04B0
+
+    END
+END

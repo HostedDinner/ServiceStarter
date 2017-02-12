@@ -58,7 +58,7 @@ bool Window::showWindow() {
 }
 
 bool Window::updateWindow() {
-    UpdateWindow(this->hwnd);
+    return (UpdateWindow(this->hwnd) != 0);
 }
 
 WPARAM Window::handleMessages() {
