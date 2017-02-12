@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <itemPath>ServiceConnection.h</itemPath>
+      <itemPath>ServiceGUI.h</itemPath>
+      <itemPath>WinService.h</itemPath>
+      <itemPath>Window.h</itemPath>
+      <itemPath>WindowHelper.h</itemPath>
+      <itemPath>constants.h</itemPath>
+      <itemPath>main.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+      <logicalFolder name="resource" displayName="resource" projectFiles="true">
+        <itemPath>resource/icon.ico</itemPath>
+        <itemPath>resource/icon.svg</itemPath>
+        <itemPath>resource/icon16.png</itemPath>
+        <itemPath>resource/icon256.png</itemPath>
+        <itemPath>resource/icon32.png</itemPath>
+        <itemPath>resource/icon48.png</itemPath>
+      </logicalFolder>
+      <itemPath>resource.rc</itemPath>
+      <itemPath>xp.manifest</itemPath>
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>ServiceConnection.cpp</itemPath>
+      <itemPath>ServiceGUI.cpp</itemPath>
+      <itemPath>WinService.cpp</itemPath>
+      <itemPath>Window.cpp</itemPath>
+      <itemPath>WindowHelper.cpp</itemPath>
+      <itemPath>main.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+    <itemPath>LICENSE.md</itemPath>
+    <itemPath>README.md</itemPath>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>resource</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <preprocessorList>
+            <Elem>_WIN32_WINNT = 0x60</Elem>
+          </preprocessorList>
+        </cTool>
+        <ccTool>
+          <architecture>2</architecture>
+          <standard>8</standard>
+          <preprocessorList>
+            <Elem>_WIN32_WINNT=0x0600</Elem>
+          </preprocessorList>
+        </ccTool>
+        <linkerTool>
+          <additionalDep>resource.o</additionalDep>
+          <linkerLibItems>
+            <linkerOptionItem>resource.o</linkerOptionItem>
+            <linkerLibLibItem>gdi32</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <item path="LICENSE.md" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="README.md" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ServiceConnection.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ServiceConnection.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ServiceGUI.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ServiceGUI.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="WinService.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="WinService.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Window.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Window.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="WindowHelper.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="WindowHelper.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="constants.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="main.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resource.rc" ex="false" tool="3" flavor2="0">
+        <customTool>
+          <customToolCommandline>windres.exe resource.rc resource.o</customToolCommandline>
+          <customToolOutputs>resource.o</customToolOutputs>
+        </customTool>
+      </item>
+      <item path="resource/icon.ico" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resource/icon.svg" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resource/icon16.png" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resource/icon256.png" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resource/icon32.png" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resource/icon48.png" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="xp.manifest" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+          <preprocessorList>
+            <Elem>_WIN32_WINNT=0x0600</Elem>
+          </preprocessorList>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+          <stripSymbols>true</stripSymbols>
+          <architecture>2</architecture>
+          <standard>8</standard>
+          <commandLine>-Wl,--subsystem,windows</commandLine>
+          <preprocessorList>
+            <Elem>_WIN32_WINNT=0x0600</Elem>
+          </preprocessorList>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+        <linkerTool>
+          <additionalDep>resource.o</additionalDep>
+          <linkerLibItems>
+            <linkerOptionItem>resource.o</linkerOptionItem>
+            <linkerLibLibItem>gdi32</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+      <item path="LICENSE.md" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="README.md" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ServiceConnection.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ServiceConnection.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="ServiceGUI.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="ServiceGUI.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="WinService.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="WinService.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Window.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Window.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="WindowHelper.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="WindowHelper.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="constants.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="main.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resource.rc" ex="false" tool="3" flavor2="0">
+        <customTool>
+          <customToolCommandline>windres.exe resource.rc resource.o</customToolCommandline>
+          <customToolOutputs>resource.o</customToolOutputs>
+        </customTool>
+      </item>
+      <item path="resource/icon.ico" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resource/icon.svg" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resource/icon16.png" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resource/icon256.png" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resource/icon32.png" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="resource/icon48.png" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="xp.manifest" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
