@@ -2,6 +2,6 @@
 #include <windows.h> // include for version info constants
 #include <commctrl.h>
 
-IDI_MAINICON ICON "resource/icon.ico"
+IDI_MAINICON ICON "../resource/icon.ico"
 
-CREATEPROCESS_MANIFEST_RESOURCE_ID 24 "xp.manifest"
+CREATEPROCESS_MANIFEST_RESOURCE_ID 24 "../resource/xp.manifest"

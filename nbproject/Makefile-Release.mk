@@ -35,16 +35,16 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/ServiceConnection.o \
-	${OBJECTDIR}/ServiceGUI.o \
-	${OBJECTDIR}/WinService.o \
-	${OBJECTDIR}/Window.o \
-	${OBJECTDIR}/WindowHelper.o \
-	${OBJECTDIR}/main.o
+	${OBJECTDIR}/src/ServiceConnection.o \
+	${OBJECTDIR}/src/ServiceGUI.o \
+	${OBJECTDIR}/src/WinService.o \
+	${OBJECTDIR}/src/Window.o \
+	${OBJECTDIR}/src/WindowHelper.o \
+	${OBJECTDIR}/src/main.o
 
 
 # C Compiler Flags
-CFLAGS=
+CFLAGS=-m64
 
 # CC Compiler Flags
 CCFLAGS=-m64 -Wl,--subsystem,windows
@@ -57,51 +57,52 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=resource.o -lgdi32
+LDLIBSOPTIONS=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/resource.o -lgdi32
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
 	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/servicestarter.exe
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/servicestarter.exe: resource.o
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/servicestarter.exe: ${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/resource.o
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/servicestarter.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/servicestarter ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/ServiceConnection.o: ServiceConnection.cpp
-	${MKDIR} -p ${OBJECTDIR}
+${OBJECTDIR}/src/ServiceConnection.o: src/ServiceConnection.cpp
+	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -s -D_WIN32_WINNT=0x0600 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ServiceConnection.o ServiceConnection.cpp
+	$(COMPILE.cc) -O2 -s -D_WIN32_WINNT=0x0600 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/ServiceConnection.o src/ServiceConnection.cpp
 
-${OBJECTDIR}/ServiceGUI.o: ServiceGUI.cpp
-	${MKDIR} -p ${OBJECTDIR}
+${OBJECTDIR}/src/ServiceGUI.o: src/ServiceGUI.cpp
+	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -s -D_WIN32_WINNT=0x0600 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/ServiceGUI.o ServiceGUI.cpp
+	$(COMPILE.cc) -O2 -s -D_WIN32_WINNT=0x0600 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/ServiceGUI.o src/ServiceGUI.cpp
 
-${OBJECTDIR}/WinService.o: WinService.cpp
-	${MKDIR} -p ${OBJECTDIR}
+${OBJECTDIR}/src/WinService.o: src/WinService.cpp
+	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -s -D_WIN32_WINNT=0x0600 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/WinService.o WinService.cpp
+	$(COMPILE.cc) -O2 -s -D_WIN32_WINNT=0x0600 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/WinService.o src/WinService.cpp
 
-${OBJECTDIR}/Window.o: Window.cpp
-	${MKDIR} -p ${OBJECTDIR}
+${OBJECTDIR}/src/Window.o: src/Window.cpp
+	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -s -D_WIN32_WINNT=0x0600 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Window.o Window.cpp
+	$(COMPILE.cc) -O2 -s -D_WIN32_WINNT=0x0600 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Window.o src/Window.cpp
 
-${OBJECTDIR}/WindowHelper.o: WindowHelper.cpp
-	${MKDIR} -p ${OBJECTDIR}
+${OBJECTDIR}/src/WindowHelper.o: src/WindowHelper.cpp
+	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -s -D_WIN32_WINNT=0x0600 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/WindowHelper.o WindowHelper.cpp
+	$(COMPILE.cc) -O2 -s -D_WIN32_WINNT=0x0600 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/WindowHelper.o src/WindowHelper.cpp
 
-${OBJECTDIR}/main.o: main.cpp
-	${MKDIR} -p ${OBJECTDIR}
+${OBJECTDIR}/src/main.o: src/main.cpp
+	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -s -D_WIN32_WINNT=0x0600 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -O2 -s -D_WIN32_WINNT=0x0600 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/main.o src/main.cpp
 
-resource.o: resource.rc
+${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/resource.o: src/resource.rc
+	${MKDIR} -p ${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 	@echo Performing Custom Build Step
-	windres.exe resource.rc resource.o
+	windres.exe src/resource.rc ${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/resource.o
 
 # Subprojects
 .build-subprojects:
@@ -109,7 +110,7 @@ resource.o: resource.rc
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} resource.o
+	${RM} ${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/resource.o
 
 # Subprojects
 .clean-subprojects:

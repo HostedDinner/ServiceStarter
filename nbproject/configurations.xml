@@ -4,13 +4,13 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>ServiceConnection.h</itemPath>
-      <itemPath>ServiceGUI.h</itemPath>
-      <itemPath>WinService.h</itemPath>
-      <itemPath>Window.h</itemPath>
-      <itemPath>WindowHelper.h</itemPath>
-      <itemPath>constants.h</itemPath>
-      <itemPath>main.h</itemPath>
+      <itemPath>src/ServiceConnection.h</itemPath>
+      <itemPath>src/ServiceGUI.h</itemPath>
+      <itemPath>src/WinService.h</itemPath>
+      <itemPath>src/Window.h</itemPath>
+      <itemPath>src/WindowHelper.h</itemPath>
+      <itemPath>src/constants.h</itemPath>
+      <itemPath>src/main.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -23,18 +23,18 @@
         <itemPath>resource/icon32.png</itemPath>
         <itemPath>resource/icon48.png</itemPath>
       </logicalFolder>
-      <itemPath>resource.rc</itemPath>
-      <itemPath>xp.manifest</itemPath>
+      <itemPath>src/resource.rc</itemPath>
+      <itemPath>resource/xp.manifest</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>ServiceConnection.cpp</itemPath>
-      <itemPath>ServiceGUI.cpp</itemPath>
-      <itemPath>WinService.cpp</itemPath>
-      <itemPath>Window.cpp</itemPath>
-      <itemPath>WindowHelper.cpp</itemPath>
-      <itemPath>main.cpp</itemPath>
+      <itemPath>src/ServiceConnection.cpp</itemPath>
+      <itemPath>src/ServiceGUI.cpp</itemPath>
+      <itemPath>src/WinService.cpp</itemPath>
+      <itemPath>src/Window.cpp</itemPath>
+      <itemPath>src/WindowHelper.cpp</itemPath>
+      <itemPath>src/main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -51,6 +51,7 @@
     <itemPath>README.md</itemPath>
   </logicalFolder>
   <sourceRootList>
+    <Elem>src</Elem>
     <Elem>resource</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
@@ -63,9 +64,11 @@
       </toolsSet>
       <compileType>
         <cTool>
+          <architecture>2</architecture>
           <preprocessorList>
-            <Elem>_WIN32_WINNT = 0x60</Elem>
+            <Elem>_WIN32_WINNT=0x0600</Elem>
           </preprocessorList>
+          <warningLevel>2</warningLevel>
         </cTool>
         <ccTool>
           <architecture>2</architecture>
@@ -73,11 +76,13 @@
           <preprocessorList>
             <Elem>_WIN32_WINNT=0x0600</Elem>
           </preprocessorList>
+          <warningLevel>2</warningLevel>
         </ccTool>
         <linkerTool>
-          <additionalDep>resource.o</additionalDep>
+          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/servicestarter</output>
+          <additionalDep>${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/resource.o</additionalDep>
           <linkerLibItems>
-            <linkerOptionItem>resource.o</linkerOptionItem>
+            <linkerOptionItem>${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/resource.o</linkerOptionItem>
             <linkerLibLibItem>gdi32</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
@@ -85,38 +90,6 @@
       <item path="LICENSE.md" ex="false" tool="3" flavor2="0">
       </item>
       <item path="README.md" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ServiceConnection.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ServiceConnection.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ServiceGUI.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ServiceGUI.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="WinService.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="WinService.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Window.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Window.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="WindowHelper.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="WindowHelper.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="constants.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="main.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="main.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="resource.rc" ex="false" tool="3" flavor2="0">
-        <customTool>
-          <customToolCommandline>windres.exe resource.rc resource.o</customToolCommandline>
-          <customToolOutputs>resource.o</customToolOutputs>
-        </customTool>
       </item>
       <item path="resource/icon.ico" ex="false" tool="3" flavor2="0">
       </item>
@@ -130,7 +103,39 @@
       </item>
       <item path="resource/icon48.png" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="xp.manifest" ex="false" tool="3" flavor2="0">
+      <item path="resource/xp.manifest" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/ServiceConnection.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/ServiceConnection.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/ServiceGUI.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/ServiceGUI.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/WinService.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/WinService.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Window.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Window.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/WindowHelper.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/WindowHelper.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/constants.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/main.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/resource.rc" ex="false" tool="3" flavor2="0">
+        <customTool>
+          <customToolCommandline>windres.exe src/resource.rc ${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/resource.o</customToolCommandline>
+          <customToolOutputs>${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/resource.o</customToolOutputs>
+        </customTool>
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -141,7 +146,9 @@
       </toolsSet>
       <compileType>
         <cTool>
-          <developmentMode>5</developmentMode>
+          <developmentMode>0</developmentMode>
+          <stripSymbols>true</stripSymbols>
+          <architecture>2</architecture>
           <preprocessorList>
             <Elem>_WIN32_WINNT=0x0600</Elem>
           </preprocessorList>
@@ -163,9 +170,10 @@
           <developmentMode>5</developmentMode>
         </asmTool>
         <linkerTool>
-          <additionalDep>resource.o</additionalDep>
+          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/servicestarter</output>
+          <additionalDep>${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/resource.o</additionalDep>
           <linkerLibItems>
-            <linkerOptionItem>resource.o</linkerOptionItem>
+            <linkerOptionItem>${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/resource.o</linkerOptionItem>
             <linkerLibLibItem>gdi32</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
@@ -173,38 +181,6 @@
       <item path="LICENSE.md" ex="false" tool="3" flavor2="0">
       </item>
       <item path="README.md" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ServiceConnection.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ServiceConnection.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="ServiceGUI.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="ServiceGUI.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="WinService.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="WinService.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Window.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Window.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="WindowHelper.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="WindowHelper.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="constants.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="main.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="main.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="resource.rc" ex="false" tool="3" flavor2="0">
-        <customTool>
-          <customToolCommandline>windres.exe resource.rc resource.o</customToolCommandline>
-          <customToolOutputs>resource.o</customToolOutputs>
-        </customTool>
       </item>
       <item path="resource/icon.ico" ex="false" tool="3" flavor2="0">
       </item>
@@ -218,7 +194,39 @@
       </item>
       <item path="resource/icon48.png" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="xp.manifest" ex="false" tool="3" flavor2="0">
+      <item path="resource/xp.manifest" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/ServiceConnection.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/ServiceConnection.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/ServiceGUI.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/ServiceGUI.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/WinService.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/WinService.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Window.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Window.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/WindowHelper.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/WindowHelper.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/constants.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/main.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/resource.rc" ex="false" tool="3" flavor2="0">
+        <customTool>
+          <customToolCommandline>windres.exe src/resource.rc ${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/resource.o</customToolCommandline>
+          <customToolOutputs>${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/resource.o</customToolOutputs>
+        </customTool>
       </item>
     </conf>
   </confs>
