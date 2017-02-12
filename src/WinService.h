@@ -12,8 +12,8 @@
 #include <string>
 #include <functional>
 
-
-#include "ServiceConnection.h"
+class ServiceConnection;
+//#include "ServiceConnection.h"
 
 
 //Mingw does not provide them?

@@ -14,6 +14,8 @@
 
 #include "WinService.h"
 
+#include "ServiceConnection.h"
+
 WinService::WinService(std::wstring name) {
     this->name = name;
     

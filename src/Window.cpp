@@ -14,6 +14,12 @@
 
 #include "Window.h"
 
+#include <windowsx.h>
+#include <functional>
+
+#include "WindowHelper.h"
+#include "constants.h"
+
 Window::Window(std::wstring title, int width, int height, HINSTANCE hInstance){
     std::wstring classname = L"MyWindowsClass";
     

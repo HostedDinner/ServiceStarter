@@ -8,12 +8,5 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#include <windows.h>
-#include <thread>
-
-#include "Window.h"
-#include "WinService.h"
-#include "ServiceGUI.h"
-
 #endif /* MAIN_H */
 

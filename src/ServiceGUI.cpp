@@ -14,6 +14,11 @@
 
 #include "ServiceGUI.h"
 
+#include "Window.h"
+#include "WindowHelper.h"
+#include "WinService.h"
+#include "rgb.h"
+
 //static initialisation
 int ServiceGUI::nextInt = 0;
 const rgb ServiceGUI::running = {115, 210, 22};

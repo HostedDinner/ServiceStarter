@@ -9,47 +9,16 @@
 #define WINDOW_H
 
 #include <windows.h>
-#include <windowsx.h>
 #include <string>
+#include <utility>
 #include <unordered_map>
-#include <functional>
 #include <list>
 
-#include "constants.h"
-#include "WindowHelper.h"
+#include "rgb.h"
 
-/**
- * simple struct for holding RGB color values.
- */
-struct rgb { int r, g, b; };
+class WindowHelper;
+//#include "WindowHelper.h"
 
-/**
- * Holds information about a painting something on the GUI. Functor.
- */
-struct paintRGB {
-    /**
-     * The color. This is used for dynamically change the color.
-     */
-    rgb color;
-    
-    /**
-     * The function, which actually draws something on the screen. Called in the WM_PAINT message.
-     */
-    std::function<void(HDC, rgb)> f;
-    
-    /**
-     * stores a RECT, whoch covers (appr.) the drawn area. This is for better invalidate the draw area.
-     */
-    RECT coveredRect;
-    
-    /**
-     * Overloading the () for easier access.
-     * @param hDC Device Context Handle
-     */
-    void operator()(HDC hDC) const{
-        return f(hDC, color);
-    }
-};
 
 typedef std::pair<UINT_PTR, paintRGB> paintPair;
 

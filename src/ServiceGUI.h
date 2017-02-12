@@ -11,8 +11,12 @@
 #include <windows.h>
 #include <thread>
 
-#include "Window.h"
-#include "WinService.h"
+class Window;
+class WinService;
+struct rgb;
+//#include "Window.h"
+//#include "WinService.h"
+//#include "rgb.h"
 
 /**
  * Wrapper class for the management of the gui and connection to the underliing service.
