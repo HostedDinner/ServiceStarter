@@ -5,5 +5,4 @@ This can be done for example in this way: [see Stack Overflow](http://stackoverf
 
 It is written in C++ (uses features of C++11) and is small in size.
 
-At the moment the service names are hardcoded in the main file. This will be changed later.
-Also there are very less safety fallbacks, if failing, because the code is a little bit messy.
+There are very less safety fallbacks for failing. Because the code is a little bit messy.

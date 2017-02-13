@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<servicestarter appVersion="1.0.0">
+    <servicelist>
+        <service>
+            <name>Apache2.4ServerDev</name>
+            <label>Apache</label>
+        </service>
+        <service>
+            <name>MySQLDev</name>
+            <label>MySQL</label>
+        </service>
+    </servicelist>
+</servicestarter>

@@ -35,12 +35,14 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/src/ConfigParser.o \
 	${OBJECTDIR}/src/ServiceConnection.o \
 	${OBJECTDIR}/src/ServiceGUI.o \
 	${OBJECTDIR}/src/WinService.o \
 	${OBJECTDIR}/src/Window.o \
 	${OBJECTDIR}/src/WindowHelper.o \
-	${OBJECTDIR}/src/main.o
+	${OBJECTDIR}/src/main.o \
+	${OBJECTDIR}/src/tinyxml2/tinyxml2.o
 
 
 # C Compiler Flags
@@ -68,6 +70,11 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/servicestarter.exe: ${CND_BUILDDIR}/$
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/servicestarter.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/servicestarter ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/src/ConfigParser.o: src/ConfigParser.cpp
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -s -D_WIN32_WINNT=0x0600 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/ConfigParser.o src/ConfigParser.cpp
 
 ${OBJECTDIR}/src/ServiceConnection.o: src/ServiceConnection.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
@@ -103,6 +110,11 @@ ${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/resource.o: src/resource.rc
 	${MKDIR} -p ${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 	@echo Performing Custom Build Step
 	windres.exe src/resource.rc ${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/resource.o
+
+${OBJECTDIR}/src/tinyxml2/tinyxml2.o: src/tinyxml2/tinyxml2.cpp
+	${MKDIR} -p ${OBJECTDIR}/src/tinyxml2
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -s -D_WIN32_WINNT=0x0600 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/tinyxml2/tinyxml2.o src/tinyxml2/tinyxml2.cpp
 
 # Subprojects
 .build-subprojects:

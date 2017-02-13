@@ -60,8 +60,8 @@ mkdir -p ${NBTMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-makeDirectory "${NBTMPDIR}/servicestarter"
-copyFileToTmpDir "config.xml" "${NBTMPDIR}/${PACKAGE_TOP_DIR}config.xml" 0644
+makeDirectory "${NBTMPDIR}/servicestarter/bin"
+copyFileToTmpDir "config.xml" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/config.xml" 0644
 
 cd "${TOP}"
 makeDirectory "${NBTMPDIR}/servicestarter/bin"
