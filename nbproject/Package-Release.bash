@@ -67,6 +67,14 @@ cd "${TOP}"
 makeDirectory "${NBTMPDIR}/servicestarter/bin"
 copyFileToTmpDir "${OUTPUT_PATH}.exe" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}.exe" 0755
 
+cd "${TOP}"
+makeDirectory "${NBTMPDIR}/servicestarter/bin"
+copyFileToTmpDir "servicestarter.VisualElementsManifest.xml" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/servicestarter.VisualElementsManifest.xml" 0644
+
+cd "${TOP}"
+makeDirectory "${NBTMPDIR}/servicestarter/bin"
+copyFileToTmpDir "${OUTPUT_PATH}.exe" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}.exe" 0755
+
 
 # Generate zip file
 cd "${TOP}"

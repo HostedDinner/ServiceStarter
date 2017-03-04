@@ -112,6 +112,18 @@
                             perm="755"
                             owner="root"
                             group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/servicestarter.VisualElementsManifest.xml"
+                            from="servicestarter.VisualElementsManifest.xml"
+                            perm="644"
+                            owner="root"
+                            group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}.exe"
+                            from="${OUTPUT_PATH}.exe"
+                            perm="755"
+                            owner="root"
+                            group="bin"/>
         </packFileList>
       </packaging>
       <item path="LICENSE.md" ex="false" tool="3" flavor2="0">
@@ -223,6 +235,18 @@
           <packFileListElem type="File"
                             to="${PACKAGE_TOP_DIR}bin/config.xml"
                             from="config.xml"
+                            perm="644"
+                            owner="root"
+                            group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}.exe"
+                            from="${OUTPUT_PATH}.exe"
+                            perm="755"
+                            owner="root"
+                            group="bin"/>
+          <packFileListElem type="File"
+                            to="${PACKAGE_TOP_DIR}bin/servicestarter.VisualElementsManifest.xml"
+                            from="servicestarter.VisualElementsManifest.xml"
                             perm="644"
                             owner="root"
                             group="bin"/>
