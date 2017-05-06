@@ -30,23 +30,12 @@ WinService::~WinService() {
     delete this->pSN;
 }
 
-bool WinService::start() {
-    ServiceConnection con = ServiceConnection(this->name, SERVICE_START);
-    
-    //TODO: could handle error, for example, if user has not the right to start the service
-    bool succ = (StartService(con.getSCService(), 0, NULL) != 0);
-    
-    return succ;
+void WinService::start() {
+    std::thread(&WinService::start_intern, this).detach();
 }
 
-bool WinService::stop() {
-    ServiceConnection con = ServiceConnection(this->name, SERVICE_STOP);
-    SERVICE_STATUS serviceStatus;
-    
-    //TODO: could handle error, for example, if user has not the right to stop the service
-    bool succ = (ControlService(con.getSCService(), SERVICE_CONTROL_STOP, &serviceStatus) != 0);
-    
-    return succ;
+void WinService::stop() {
+    std::thread(&WinService::stop_intern, this).detach();
 }
 
 DWORD WinService::status() {
@@ -107,6 +96,10 @@ void WinService::cancelServiceChange() {
 }
 
 
+
+
+
+
 void WinService::callServiceChange(PSERVICE_NOTIFY pSN) {
     if(this->serviceChange != NULL){
         this->serviceChange(pSN);
@@ -114,3 +107,18 @@ void WinService::callServiceChange(PSERVICE_NOTIFY pSN) {
     }
 }
 
+void WinService::start_intern(){
+    ServiceConnection con = ServiceConnection(this->name, SERVICE_START);
+    
+    //TODO: could handle error, for example, if user has not the right to start the service
+    bool succ = (StartService(con.getSCService(), 0, NULL) != 0);
+}
+
+
+void WinService::stop_intern() {
+    ServiceConnection con = ServiceConnection(this->name, SERVICE_STOP);
+    SERVICE_STATUS serviceStatus;
+    
+    //TODO: could handle error, for example, if user has not the right to stop the service
+    bool succ = (ControlService(con.getSCService(), SERVICE_CONTROL_STOP, &serviceStatus) != 0);
+}

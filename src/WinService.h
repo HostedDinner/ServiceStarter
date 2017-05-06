@@ -11,6 +11,7 @@
 #include <windows.h>
 #include <string>
 #include <functional>
+#include <thread>
 
 class ServiceConnection;
 //#include "ServiceConnection.h"
@@ -51,15 +52,13 @@ public:
     virtual ~WinService();
     
     /**
-     * Start the service
-     * @return true on success
+     * Start the service (opens a new thread and calls start_intern)
      */
-    bool start();
+    void start();
     /**
-     * Stops the service
-     * @return true on success
+     * Stops the service  (opens a new thread and calls stop_intern)
      */
-    bool stop();
+    void stop();
     
     /**
      * gets the Status of the service
@@ -95,6 +94,17 @@ private:
      * @param pSN SERVICE_NOTIFY which holds the status informtion of the service.
      */
     void callServiceChange(PSERVICE_NOTIFY pSN);
+    
+    
+    /**
+     * Start the service
+     */
+    void start_intern();
+    
+    /**
+     * Stops the service
+     */
+    void stop_intern();
     
 };
 
