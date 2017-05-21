@@ -27,6 +27,10 @@ class ServiceConnection;
 
 #endif //SERVICE_NOTIFY_STOPPED
 
+//Custom
+#define SERVICE_INVALID_NAME         0xF0000001
+
+
 
 #ifndef SERVICE_NOTIFY_STATUS_CHANGE
 #define SERVICE_NOTIFY_STATUS_CHANGE 0x00000002

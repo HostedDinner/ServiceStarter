@@ -20,6 +20,8 @@ private:
     SC_HANDLE hSCManager;
     SC_HANDLE hService;
     
+    DWORD error;
+    
 public:
     /**
      * Constructor
@@ -46,6 +48,9 @@ public:
      */
     SC_HANDLE getSCService();
     
+    bool isOpenedSuccessful();
+    
+    DWORD lastError();
 private:
 
 };

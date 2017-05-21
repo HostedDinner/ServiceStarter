@@ -40,6 +40,11 @@ void WinService::stop() {
 
 DWORD WinService::status() {
     ServiceConnection con = ServiceConnection(this->name, SERVICE_QUERY_STATUS);
+    
+    if(!con.isOpenedSuccessful() && con.lastError() == ERROR_SERVICE_DOES_NOT_EXIST){
+        return SERVICE_INVALID_NAME;
+    }
+    
     SERVICE_STATUS_PROCESS ssStatus;
     DWORD bytesNeeded; //I do not use this...
     

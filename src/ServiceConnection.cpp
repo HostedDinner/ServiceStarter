@@ -17,6 +17,9 @@
 ServiceConnection::ServiceConnection(std::wstring name, DWORD serviceAccess, DWORD managerAccess) {
     this->hSCManager = OpenSCManager(NULL, SERVICES_ACTIVE_DATABASE, managerAccess);
     this->hService = OpenService(this->hSCManager, name.c_str(), serviceAccess);
+    if(this->hService == NULL){
+        this->error = GetLastError();
+    }
 }
 
 ServiceConnection::~ServiceConnection() {
@@ -32,3 +35,12 @@ SC_HANDLE ServiceConnection::getSCManager() {
 SC_HANDLE ServiceConnection::getSCService() {
     return this->hService;
 }
+
+bool ServiceConnection::isOpenedSuccessful(){
+    return this->hService != NULL;
+}
+
+DWORD ServiceConnection::lastError() {
+    return this->error;
+}
+

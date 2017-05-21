@@ -37,7 +37,10 @@ private:
      * stopped color
      */
     static const rgb stopped;
-    
+    /**
+     * invalid color
+     */
+    static const rgb invalid;
     
     Window *pWindow;
     std::wstring serviceName;

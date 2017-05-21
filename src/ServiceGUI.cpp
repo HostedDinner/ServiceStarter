@@ -24,6 +24,7 @@ int ServiceGUI::nextInt = 0;
 const rgb ServiceGUI::running = {115, 210, 22};
 const rgb ServiceGUI::pending = {237, 212, 0};
 const rgb ServiceGUI::stopped = {204, 0, 0};
+const rgb ServiceGUI::invalid = {85, 0, 0};
 
 ServiceGUI::ServiceGUI(Window *pWindow, std::wstring serviceName, std::wstring buttonName) {
     //copy from input
@@ -72,6 +73,11 @@ void ServiceGUI::changeStatus(DWORD status) {
     WindowHelper *wndHelper = pWindow->getpWindowHelper();
     
     switch(status){
+        case SERVICE_INVALID_NAME:
+            this->pWindow->changeColorBox(this->indicatorBox, invalid);
+            wndHelper->disableControl(this->startButton);
+            wndHelper->disableControl(this->stopButton);
+            break;
         case SERVICE_START_PENDING:
         case SERVICE_STOP_PENDING:
             this->pWindow->changeColorBox(this->indicatorBox, pending);
