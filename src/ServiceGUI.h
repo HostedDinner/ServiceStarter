@@ -19,7 +19,7 @@ struct rgb;
 //#include "rgb.h"
 
 /**
- * Wrapper class for the management of the gui and connection to the underliing service.
+ * Wrapper class for the management of the gui and connection to the underlying service.
  */
 class ServiceGUI {
 private:
@@ -78,7 +78,7 @@ private:
      * Tracks the number of added services to the gui
      * @return an id, starting at 0
      */
-    int getNextID(){return nextInt++;};
+    inline int getNextID(){return nextInt++;};
     
     /**
      * This function will change the buttons and the color of the indicator according to the status.

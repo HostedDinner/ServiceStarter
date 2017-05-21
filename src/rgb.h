@@ -16,10 +16,12 @@
  */
 struct rgb { int r, g, b; };
 
+
+
 /**
  * Holds information about a painting something on the GUI. Functor.
  */
-struct paintRGB {
+struct paintRGB{
     /**
      * The color. This is used for dynamically change the color.
      */
@@ -36,11 +38,29 @@ struct paintRGB {
     RECT coveredRect;
     
     /**
+    * simple offset
+    */
+   struct { int x, y; } offset;
+    
+    /**
      * Overloading the () for easier access.
      * @param hDC Device Context Handle
      */
     void operator()(HDC hDC) const{
         return f(hDC, color);
+    }
+    
+    /**
+     * 
+     * @return the covered rect, moved by the offset
+     */
+    RECT trueCoveredRect(){
+        RECT invalid = coveredRect;
+        invalid.top += offset.x;
+        invalid.bottom += offset.x;
+        invalid.left += offset.y;
+        invalid.right += offset.y;
+        return invalid;
     }
 };
 

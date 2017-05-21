@@ -14,10 +14,13 @@
 
 #include "Window.h"
 
+#include <iostream>
 #include <windowsx.h>
 #include <functional>
+#include <algorithm>
 
 #include "WindowHelper.h"
+#include "ScrollBarController.h"
 #include "constants.h"
 
 Window::Window(std::wstring title, int width, int height, HINSTANCE hInstance){
@@ -29,7 +32,11 @@ Window::Window(std::wstring title, int width, int height, HINSTANCE hInstance){
         this->hInstance = hInstance;
     }
     
-    nextSubWindowID = 1;
+    this->nextSubWindowID = 1;
+    this->offsetY = 0;
+    
+    this->clientX = width;
+    this->clientY = height;
     
     this->initSuccess = true;
     
@@ -44,7 +51,8 @@ Window::Window(std::wstring title, int width, int height, HINSTANCE hInstance){
         MessageBox(NULL, L"Window Registration Failed! (Create Handle)", L"Error!", MB_ICONEXCLAMATION | MB_OK);
     }
     
-    wndHelper = new WindowHelper();
+    this->wndHelper = new WindowHelper();
+    this->scrollBarController = new ScrollBarController(this->hwnd, 0, 100, 1);
     
     this->callbacks = new std::unordered_map<WPARAM, std::function<void()>>();
     this->paintJobs = new std::list<paintPair>();
@@ -54,6 +62,7 @@ Window::~Window() {
     delete callbacks;
     delete paintJobs;
     delete wndHelper;
+    delete scrollBarController;
 }
 
 bool Window::showWindow() {
@@ -90,6 +99,9 @@ WindowHelper *Window::getpWindowHelper() {
     return this->wndHelper;
 }
 
+ScrollBarController *Window::getpScrollBarController() {
+    return this->scrollBarController;
+}
 
 
 HWND Window::addButton(int x, int y, int width, int height, std::wstring caption, std::function<void()> onClick) {
@@ -128,7 +140,7 @@ UINT_PTR Window::addStaticBox(int x, int y, int width, int height, rgb color) {
     
     RECT coveredRect = {x, y, x+width, y+height};
         
-    this->addPaintJob(id, paintRGB{color, func, coveredRect});
+    this->addPaintJob(id, paintRGB{color, func, coveredRect, {0, 0}});
     
     InvalidateRect(this->hwnd, &coveredRect, false);
     
@@ -140,7 +152,10 @@ void Window::changeColorBox(UINT_PTR id, rgb color) {
         if(elem.first == id){
             elem.second.color = color;
             
-            InvalidateRect(this->hwnd, &elem.second.coveredRect, false);
+            elem.second.offset.x = this->offsetY;
+            RECT invalidRect = elem.second.trueCoveredRect();
+            
+            InvalidateRect(this->hwnd, &invalidRect, false);
         }
     }
 }
@@ -183,6 +198,56 @@ LRESULT CALLBACK Window::realWndProc(UINT msg, WPARAM wParam, LPARAM lParam){
                 }
                 
                 EndPaint(this->hwnd, &ps);
+                return 0;
+            }
+        //it does not work anyway
+        /*case WM_MOUSEHWHEEL:
+            {
+                std::wcout << L"a" << std::endl;
+                if (((short) GET_WHEEL_DELTA_WPARAM(wParam))/WHEEL_DELTA > 0 ){
+                    PostMessage (this->hwnd, WM_VSCROLL, SB_LINEUP, (LPARAM) 0);
+                }
+                if (((short) GET_WHEEL_DELTA_WPARAM(wParam))/WHEEL_DELTA < 0 ){
+                    PostMessage (this->hwnd, WM_VSCROLL, SB_LINEDOWN, (LPARAM) 0);
+                }
+                return 0;
+            }*/
+        case WM_VSCROLL:
+            {
+                int movement = this->scrollBarController->handleScroll(LOWORD(wParam));
+                if(movement != 0){
+                    this->scrollContent(10*movement);
+                }
+                return 0;
+            }
+        case WM_SIZE:
+            {
+                if(wParam != SIZE_MINIMIZED){
+                    int newX = LOWORD (lParam);
+                    int newY = HIWORD (lParam);
+
+                    //TODO: In some combinations this leads to wrong movement
+                    //but this almost works...
+                    //otherwise the behaviour is even more strange
+                    if(newY > this->clientY && this->offsetY < 0){
+                        this->scrollContent(newY - this->clientY);
+                    }
+
+                    this->scrollBarController->setPageSize(newY/10);
+
+
+                    this->clientX = newX;
+                    this->clientY = newY;
+                
+                }
+                
+                return 0;
+            }
+        case WM_GETMINMAXINFO:
+            {
+                LPMINMAXINFO lpMMI = (LPMINMAXINFO)lParam;
+                lpMMI->ptMinTrackSize.x = this->clientMinX;
+                lpMMI->ptMinTrackSize.y = this->clientMinY;
                 return 0;
             }
         case WM_CLOSE:
@@ -240,22 +305,28 @@ bool Window::regClass(std::wstring classname){
 
 bool Window::createMainWindow(std::wstring classname, std::wstring title, int width, int height) {
     
-    DWORD style = WS_OVERLAPPEDWINDOW;
+    DWORD style = WS_OVERLAPPEDWINDOW | WS_VSCROLL;
+    DWORD exstyle = WS_EX_CLIENTEDGE;
     
-    RECT clientAreasSize;
-    clientAreasSize.left = 0;
-    clientAreasSize.right = width;
-    clientAreasSize.top = 0;
-    clientAreasSize.bottom = height;
+    RECT clientAreaSize;
+    clientAreaSize.left = 0;
+    clientAreaSize.right = width;
+    clientAreaSize.top = 0;
+    clientAreaSize.bottom = height;
     
-    AdjustWindowRect(&clientAreasSize, style, false);
+    AdjustWindowRectEx(&clientAreaSize, style, false, exstyle);
+    //Scroll bar is not taken into account by AdjustWindowRect:
+    clientAreaSize.right += GetSystemMetrics(SM_CXVSCROLL);
+    
+    this->clientMinX = clientAreaSize.right - clientAreaSize.left;
+    this->clientMinY = clientAreaSize.bottom - clientAreaSize.top;
     
     CreateWindowEx(
-        WS_EX_CLIENTEDGE,
+        exstyle,
         classname.c_str(),
         title.c_str(),
         style,
-        CW_USEDEFAULT, CW_USEDEFAULT, clientAreasSize.right, clientAreasSize.bottom,
+        CW_USEDEFAULT, CW_USEDEFAULT, this->clientMinX, this->clientMinY,
         NULL, NULL, this->hInstance, this
     );
     
@@ -274,9 +345,9 @@ void Window::addPaintJob(UINT_PTR id, paintRGB paRGB) {
 void Window::drawRect(HDC hDC, int x, int y, int width, int height, rgb color) {
     RECT rect;
     rect.left = x;
-    rect.top = y;
-    rect.right = x + width;
-    rect.bottom = y + height;
+    rect.top = this->offsetY + y;
+    rect.right = rect.left + width;
+    rect.bottom = rect.top + height;
 
     HBRUSH brush = CreateSolidBrush(RGB(color.r,color.g,color.b));
 
@@ -284,3 +355,11 @@ void Window::drawRect(HDC hDC, int x, int y, int width, int height, rgb color) {
     
     DeleteBrush(brush);
 }
+
+void Window::scrollContent(int pixel) {
+    pixel = std::min(-1*this->offsetY, pixel); //never move further down then 0, content should always stay top aligned
+    ScrollWindowEx(this->hwnd, 0, pixel, NULL, NULL, NULL, NULL, SW_ERASE | SW_INVALIDATE | SW_SCROLLCHILDREN);
+    this->offsetY += pixel;
+    UpdateWindow (this->hwnd);
+}
+

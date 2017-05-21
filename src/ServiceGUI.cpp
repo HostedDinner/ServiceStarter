@@ -53,7 +53,7 @@ ServiceGUI::ServiceGUI(Window *pWindow, std::wstring serviceName, std::wstring b
 }
 
 ServiceGUI::~ServiceGUI() {
-    //tgis will stop bring the pChangeThread to halt, because no new notifications are received naymore
+    //this will bring the pChangeThread to halt, because no new notifications are received anymore
     this->pWinservice->cancelServiceChange();
     this->pChangeThread->join();
     

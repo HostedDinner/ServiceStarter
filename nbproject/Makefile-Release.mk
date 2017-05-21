@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/src/ConfigParser.o \
+	${OBJECTDIR}/src/ScrollBarController.o \
 	${OBJECTDIR}/src/ServiceConnection.o \
 	${OBJECTDIR}/src/ServiceGUI.o \
 	${OBJECTDIR}/src/WinService.o \
@@ -75,6 +76,11 @@ ${OBJECTDIR}/src/ConfigParser.o: src/ConfigParser.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -s -D_WIN32_WINNT=0x0600 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/ConfigParser.o src/ConfigParser.cpp
+
+${OBJECTDIR}/src/ScrollBarController.o: src/ScrollBarController.cpp
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -s -D_WIN32_WINNT=0x0600 -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/ScrollBarController.o src/ScrollBarController.cpp
 
 ${OBJECTDIR}/src/ServiceConnection.o: src/ServiceConnection.cpp
 	${MKDIR} -p ${OBJECTDIR}/src

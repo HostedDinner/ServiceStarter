@@ -17,7 +17,7 @@
 #include "rgb.h"
 
 class WindowHelper;
-//#include "WindowHelper.h"
+class ScrollBarController;
 
 
 typedef std::pair<UINT_PTR, paintRGB> paintPair;
@@ -31,8 +31,15 @@ private:
     UINT_PTR nextSubWindowID;
     
     WindowHelper *wndHelper;
+    ScrollBarController *scrollBarController;
     
     bool initSuccess;
+    
+    int clientX;
+    int clientY;
+    
+    int clientMinX;
+    int clientMinY;
     
     /**
      * stores all interactive callbacks. e.g. callback function fo clicking a button.
@@ -44,6 +51,11 @@ private:
      * stores the paint jobs. All functions are executed in the WM_PAINT message.
      */
     std::list<paintPair> *paintJobs;
+    
+    /**
+     * How much space is added to the y value for paint jobs, which draw directly on the DC
+     */
+    int offsetY;
     
 public:
     /**
@@ -92,6 +104,12 @@ public:
      * @return pointer to the window helper.
      */
     WindowHelper *getpWindowHelper();
+    
+    /**
+     * 
+     * @return pointer to ScrollBarController (Vertical Scroll)
+     */
+    ScrollBarController *getpScrollBarController();
     
     
     //TODO add More Things
@@ -200,6 +218,11 @@ private:
      * @param color color
      */
     void drawRect(HDC hDC, int x, int y, int width, int height, rgb color);
+    
+    /**
+     * Scrolls the content
+     */
+    void scrollContent(int pixel);
 };
 
 #endif /* WINDOW_H */
