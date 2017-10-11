@@ -41,32 +41,25 @@ int main(int argc, char* argv[]){
     auto *confs = configP.pGetServiceConfigs();
     auto length = confs->size();
     
-    ServiceGUI *pServices[length];
+    std::vector<std::unique_ptr<ServiceGUI>> services;
+    services.reserve(length);
     
-    int i = 0;
     for (auto &elem : *confs) {
-        pServices[i] = new ServiceGUI(&window, elem.first, elem.second);
-        i++;
+        std::unique_ptr<ServiceGUI> p(new ServiceGUI(&window, elem.first, elem.second));
+        services.push_back(std::move(p));
     }
     
     
     //Adjust the Scrollbar (height of 1 element is 30, top margin is 10)
     ScrollBarController *scrBC = window.getpScrollBarController();
-    scrBC->setRange(1, (i*30+10) / 10);
+    scrBC->setRange(1, (length*30+10) / 10);
     
-    
-    
-    //ServiceGUI serviceGUIApache(&window, L"Apache2.4ServerDev", L"Apache");
-    //ServiceGUI serviceGUIMySQL(&window, L"MySQLDev", L"MySQL");
 
     window.showWindow();
     
     WPARAM exitCode = window.handleMessages();
     
-    //actually someone once told me, that calling delete is alway safe, but this is not true!
-    if(length > 0 && pServices[0] != NULL){
-        delete [] pServices;
-    }
+    //cleaning the serviceGUI/Services is done by our smart pointer
     
     return exitCode;
 }

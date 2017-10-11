@@ -44,7 +44,7 @@ void ConfigParser::parse() {
     
     if(file != NULL){
         
-        tinyxml2::XMLDocument doc;
+        XMLDocument doc;
         doc.LoadFile(file);
         
         XMLElement *list = doc.FirstChildElement("servicestarter")->FirstChildElement("servicelist");

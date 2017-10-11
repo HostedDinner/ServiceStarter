@@ -78,13 +78,18 @@ bool Window::updateWindow() {
 
 WPARAM Window::handleMessages() {
     MSG msg;
+    BOOL bRet;
     
-    while(GetMessage(&msg, NULL, 0, 0) > 0){
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
+    while((bRet = GetMessage(&msg, NULL, 0, 0)) != 0){
+        if(bRet == -1){
+            break;
+        }else{
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+        }
     }
     
-    return msg.wParam;
+    return bRet == 0 ? 0 : 1;
 }
 
 bool Window::isInitSuccess() {

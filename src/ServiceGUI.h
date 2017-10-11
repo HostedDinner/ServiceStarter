@@ -74,7 +74,7 @@ public:
      * It will pass the status to the changeStatus function.
      * @param pSN receices struct, where the Service Information is inside
      */
-    void receiceStatus(PSERVICE_NOTIFY pSN);
+    void receiveStatus(PSERVICE_NOTIFY pSN);
     
 private:
     /**

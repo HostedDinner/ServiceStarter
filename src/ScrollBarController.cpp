@@ -59,7 +59,7 @@ int ScrollBarController::handleScroll(WORD type) {
     int oldPos = this->scrollInfo.nPos;
     int max = this->scrollInfo.nMax;
     int min = this->scrollInfo.nMin;
-    unsigned int pageSize = this->scrollInfo.nPage;
+    int pageSize = (int) this->scrollInfo.nPage;
     
     int newPos = 0;
     

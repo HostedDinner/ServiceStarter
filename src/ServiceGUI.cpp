@@ -50,7 +50,7 @@ ServiceGUI::ServiceGUI(Window *pWindow, std::wstring serviceName, std::wstring b
     
     //This should be launched in a new thread, because otherwise it will block the current thread
     //start receiving updates on service changes
-    this->pChangeThread = new std::thread(&WinService::registerServiceChange, this->pWinservice, std::bind(&ServiceGUI::receiceStatus, this, std::placeholders::_1), false);
+    this->pChangeThread = new std::thread(&WinService::registerServiceChange, this->pWinservice, std::bind(&ServiceGUI::receiveStatus, this, std::placeholders::_1), false);
 }
 
 ServiceGUI::~ServiceGUI() {
@@ -62,7 +62,7 @@ ServiceGUI::~ServiceGUI() {
     delete this->pChangeThread;
 }
 
-void ServiceGUI::receiceStatus(PSERVICE_NOTIFY pSN) {
+void ServiceGUI::receiveStatus(PSERVICE_NOTIFY pSN) {
     SERVICE_STATUS_PROCESS ssStatus = pSN->ServiceStatus;
     this->changeStatus(ssStatus.dwCurrentState);
 }

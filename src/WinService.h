@@ -44,7 +44,9 @@ private:
     volatile bool doServiceObservation;
     std::function<void(PSERVICE_NOTIFY)> serviceChange;
     ServiceConnection *pChangeConnection;
-    PSERVICE_NOTIFY pSN;
+    SERVICE_NOTIFY sn;
+    
+    const DWORD notifyMask = SERVICE_NOTIFY_RUNNING | SERVICE_NOTIFY_STOPPED | SERVICE_NOTIFY_START_PENDING | SERVICE_NOTIFY_STOP_PENDING;
     
 public:
     /**

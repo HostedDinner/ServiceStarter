@@ -22,12 +22,15 @@ WinService::WinService(std::wstring name) {
     this->doServiceObservation = true;
     this->serviceChange = NULL;
     this->pChangeConnection = NULL;
-    this->pSN = NULL;
+    
+    this->sn = SERVICE_NOTIFY();
+    this->sn.dwVersion = SERVICE_NOTIFY_STATUS_CHANGE;
+    this->sn.pContext = this;
+    this->sn.pfnNotifyCallback = &WinService::serviceChangeDispatcher;
 }
 
 WinService::~WinService() {
     delete this->pChangeConnection;
-    delete this->pSN;
 }
 
 void WinService::start() {
@@ -57,7 +60,7 @@ DWORD WinService::status() {
 
 
 
-void WinService::serviceChangeDispatcher(PVOID pParameter) {
+/*static*/ void WinService::serviceChangeDispatcher(PVOID pParameter) {
     PSERVICE_NOTIFY pInfo = (PSERVICE_NOTIFY) pParameter;
     ((WinService *) pInfo->pContext)->callServiceChange(pInfo);
 }
@@ -71,18 +74,10 @@ void WinService::registerServiceChange(std::function<void(PSERVICE_NOTIFY)> call
         }
         if(!resubscribe){ //first call
             this->pChangeConnection = new ServiceConnection(this->name, SERVICE_QUERY_STATUS, SC_MANAGER_ENUMERATE_SERVICE);
-            this->pSN = new SERVICE_NOTIFY;
-            
-            this->pSN->dwVersion = SERVICE_NOTIFY_STATUS_CHANGE;
-            this->pSN->pContext = this;
-            this->pSN->pfnNotifyCallback = &WinService::serviceChangeDispatcher;
-            
             this->serviceChange = callback;
         }
-
-        DWORD notifyMask = SERVICE_NOTIFY_RUNNING | SERVICE_NOTIFY_STOPPED | SERVICE_NOTIFY_START_PENDING | SERVICE_NOTIFY_STOP_PENDING;
         
-        NotifyServiceStatusChange(this->pChangeConnection->getSCService(), notifyMask, this->pSN);
+        NotifyServiceStatusChange(this->pChangeConnection->getSCService(), this->notifyMask, &this->sn);
         
         //SleepEx will wait till timeout or if a notification (above) will be received.
         //will wake up around every 2 seconds, so that the thread gets the chance to terminate (if doServiceObservation is false)
