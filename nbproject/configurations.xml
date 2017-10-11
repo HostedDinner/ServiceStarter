@@ -91,7 +91,7 @@
           <warningLevel>2</warningLevel>
         </ccTool>
         <linkerTool>
-          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/servicestarter</output>
+          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/servicestarter.exe</output>
           <additionalDep>${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/resource.o</additionalDep>
           <linkerLibItems>
             <linkerOptionItem>${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/resource.o</linkerOptionItem>
@@ -221,7 +221,7 @@
           <developmentMode>5</developmentMode>
         </asmTool>
         <linkerTool>
-          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/servicestarter</output>
+          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/servicestarter.exe</output>
           <additionalDep>${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/resource.o</additionalDep>
           <linkerLibItems>
             <linkerOptionItem>${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/resource.o</linkerOptionItem>
@@ -231,6 +231,8 @@
       </compileType>
       <packaging>
         <packType>Zip</packType>
+        <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/servicestarter.zip</output>
+        <commandlineTool>zip</commandlineTool>
         <packFileList>
           <packFileListElem type="File"
                             to="${PACKAGE_TOP_DIR}bin/config.xml"

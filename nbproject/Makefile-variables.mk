@@ -7,21 +7,21 @@ CND_BASEDIR=`pwd`
 CND_BUILDDIR=build
 CND_DISTDIR=dist
 # Debug configuration
-CND_PLATFORM_Debug=MinGW-Windows
-CND_ARTIFACT_DIR_Debug=dist/Debug/MinGW-Windows
-CND_ARTIFACT_NAME_Debug=servicestarter
-CND_ARTIFACT_PATH_Debug=dist/Debug/MinGW-Windows/servicestarter
-CND_PACKAGE_DIR_Debug=dist/Debug/MinGW-Windows/package
+CND_PLATFORM_Debug=CLang-Windows
+CND_ARTIFACT_DIR_Debug=dist/Debug/CLang-Windows
+CND_ARTIFACT_NAME_Debug=servicestarter.exe
+CND_ARTIFACT_PATH_Debug=dist/Debug/CLang-Windows/servicestarter.exe
+CND_PACKAGE_DIR_Debug=dist/Debug/CLang-Windows/package
 CND_PACKAGE_NAME_Debug=servicestarter.zip
-CND_PACKAGE_PATH_Debug=dist/Debug/MinGW-Windows/package/servicestarter.zip
+CND_PACKAGE_PATH_Debug=dist/Debug/CLang-Windows/package/servicestarter.zip
 # Release configuration
-CND_PLATFORM_Release=MinGW-Windows
-CND_ARTIFACT_DIR_Release=dist/Release/MinGW-Windows
-CND_ARTIFACT_NAME_Release=servicestarter
-CND_ARTIFACT_PATH_Release=dist/Release/MinGW-Windows/servicestarter
-CND_PACKAGE_DIR_Release=dist/Release/MinGW-Windows/package
+CND_PLATFORM_Release=CLang-Windows
+CND_ARTIFACT_DIR_Release=dist/Release/CLang-Windows
+CND_ARTIFACT_NAME_Release=servicestarter.exe
+CND_ARTIFACT_PATH_Release=dist/Release/CLang-Windows/servicestarter.exe
+CND_PACKAGE_DIR_Release=dist/Release/CLang-Windows/package
 CND_PACKAGE_NAME_Release=servicestarter.zip
-CND_PACKAGE_PATH_Release=dist/Release/MinGW-Windows/package/servicestarter.zip
+CND_PACKAGE_PATH_Release=dist/Release/CLang-Windows/package/servicestarter.zip
 #
 # include compiler specific variables
 #

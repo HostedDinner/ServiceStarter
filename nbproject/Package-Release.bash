@@ -6,15 +6,15 @@
 
 # Macros
 TOP=`pwd`
-CND_PLATFORM=MinGW-Windows
+CND_PLATFORM=CLang-Windows
 CND_CONF=Release
 CND_DISTDIR=dist
 CND_BUILDDIR=build
 CND_DLIB_EXT=dll
 NBTMPDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/servicestarter
-OUTPUT_BASENAME=servicestarter
+OUTPUT_PATH=${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/servicestarter.exe
+OUTPUT_BASENAME=servicestarter.exe
 PACKAGE_TOP_DIR=servicestarter/
 
 # Functions
@@ -66,6 +66,10 @@ copyFileToTmpDir "config.xml" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/config.xml" 064
 cd "${TOP}"
 makeDirectory "${NBTMPDIR}/servicestarter/bin"
 copyFileToTmpDir "servicestarter.VisualElementsManifest.xml" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/servicestarter.VisualElementsManifest.xml" 0644
+
+cd "${TOP}"
+makeDirectory "${NBTMPDIR}/servicestarter/bin"
+copyFileToTmpDir "${OUTPUT_PATH}.exe" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}.exe" 0755
 
 cd "${TOP}"
 makeDirectory "${NBTMPDIR}/servicestarter/bin"
