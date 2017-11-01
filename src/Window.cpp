@@ -21,6 +21,7 @@
 
 #include "WindowHelper.h"
 #include "ScrollBarController.h"
+#include "NotificationIconController.h"
 #include "constants.h"
 
 Window::Window(std::wstring title, int width, int height, HINSTANCE hInstance){
@@ -53,6 +54,7 @@ Window::Window(std::wstring title, int width, int height, HINSTANCE hInstance){
     
     this->wndHelper = new WindowHelper();
     this->scrollBarController = new ScrollBarController(this->hwnd, 0, 100, 1);
+    this->notificationIconController = new NotificationIconController(this->hwnd);
     
     this->callbacks = new std::unordered_map<WPARAM, std::function<void()>>();
     this->paintJobs = new std::list<paintPair>();
@@ -63,6 +65,7 @@ Window::~Window() {
     delete paintJobs;
     delete wndHelper;
     delete scrollBarController;
+    delete notificationIconController;
 }
 
 bool Window::showWindow() {

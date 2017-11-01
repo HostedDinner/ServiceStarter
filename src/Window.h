@@ -18,6 +18,7 @@
 
 class WindowHelper;
 class ScrollBarController;
+class NotificationIconController;
 
 
 typedef std::pair<UINT_PTR, paintRGB> paintPair;
@@ -32,6 +33,7 @@ private:
     
     WindowHelper *wndHelper;
     ScrollBarController *scrollBarController;
+    NotificationIconController *notificationIconController;
     
     bool initSuccess;
     

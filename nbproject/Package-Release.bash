@@ -69,6 +69,10 @@ copyFileToTmpDir "servicestarter.VisualElementsManifest.xml" "${NBTMPDIR}/${PACK
 
 cd "${TOP}"
 makeDirectory "${NBTMPDIR}/servicestarter/bin"
+copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
+
+cd "${TOP}"
+makeDirectory "${NBTMPDIR}/servicestarter/bin"
 copyFileToTmpDir "${OUTPUT_PATH}.exe" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}.exe" 0755
 
 cd "${TOP}"
